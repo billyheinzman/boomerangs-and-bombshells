@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Boomerangs & Bombshells — A Christian media platform focused on truth, faith, and discernment." />
+<title>Boomerangs & Bombshells | Truth. Faith. Discernment.</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Georgia, 'Palatino Linotype', serif; background: #faf8f4; color: #2a2118; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: inherit; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(250,248,244,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #e8e0d0; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-family: Georgia, serif; font-size: 17px; font-weight: 700; color: #2a2118; }
+  .nav-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .nav-links a { font-size: 13px; color: #7a6e60; font-family: system-ui, sans-serif; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: #a07830; }
+  .nav-cta { font-size: 12px; padding: 7px 16px; background: #2a2118; color: #faf8f4 !important; border-radius: 6px; font-weight: 600; letter-spacing: 0.04em; }
+  .nav-cta:hover { background: #3d3025 !important; color: #faf8f4 !important; }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 80px 0; }
+  .section-alt { background: #f3ede3; border-top: 1px solid #e8e0d0; border-bottom: 1px solid #e8e0d0; }
+  .divider { border: none; border-top: 1px solid #e8e0d0; margin: 0; }
+
+  /* TYPOGRAPHY */
+  .eyebrow { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a07830; font-family: system-ui, sans-serif; margin-bottom: 10px; }
+  .section-title { font-family: Georgia, serif; font-size: 32px; font-weight: 700; color: #2a2118; }
+
+  /* HERO */
+  .hero { max-width: 1100px; margin: 0 auto; padding: 96px 24px 80px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fdf6e8; border: 1px solid #e8d4a0; border-radius: 20px; padding: 6px 14px; margin-bottom: 32px; font-size: 11px; font-family: system-ui, sans-serif; letter-spacing: 0.14em; color: #a07830; text-transform: uppercase; }
+  .hero h1 { font-family: Georgia, serif; font-size: clamp(38px, 6vw, 64px); font-weight: 700; line-height: 1.1; color: #2a2118; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .hero h1 span { color: #a07830; }
+  .hero-sub { font-size: 13px; letter-spacing: 0.2em; color: #a09080; font-family: system-ui, sans-serif; text-transform: uppercase; margin-bottom: 28px; }
+  .hero-desc { font-size: 17px; line-height: 1.8; color: #6a5e50; max-width: 520px; margin-bottom: 48px; font-family: system-ui, sans-serif; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; background: #2a2118; color: #faf8f4; border-radius: 8px; font-size: 14px; font-family: system-ui, sans-serif; font-weight: 600; transition: background 0.2s; }
+  .btn-primary:hover { background: #3d3025; }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; background: #fdf6e8; color: #2a2118; border-radius: 8px; font-size: 14px; font-family: system-ui, sans-serif; font-weight: 500; border: 1px solid #e8d4a0; transition: all 0.2s; }
+  .btn-secondary:hover { background: #fbeecf; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; background: transparent; color: #7a6e60; border-radius: 8px; font-size: 14px; font-family: system-ui, sans-serif; border: 1px solid #d8d0c0; transition: all 0.2s; }
+  .btn-ghost:hover { background: #f0ece4; }
+
+  /* SOCIAL STRIP */
+  .social-strip { border-top: 1px solid #e8e0d0; border-bottom: 1px solid #e8e0d0; background: #f3ede3; }
+  .social-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .social-label { font-size: 11px; color: #a09080; font-family: system-ui, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+  .social-links { display: flex; gap: 6px; }
+  .social-links a { font-size: 12px; padding: 5px 14px; border: 1px solid #d8c8a8; border-radius: 6px; color: #7a6e60; font-family: system-ui, sans-serif; transition: all 0.2s; background: #faf8f4; }
+  .social-links a:hover { border-color: #a07830; color: #a07830; }
+
+  /* PODCAST */
+  .episode { display: flex; align-items: flex-start; gap: 24px; padding: 24px 0; border-bottom: 1px solid #e8e0d0; transition: background 0.15s; }
+  .ep-num { font-size: 12px; color: #b8a890; font-family: system-ui, sans-serif; min-width: 32px; padding-top: 3px; }
+  .ep-body { flex: 1; }
+  .ep-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+  .ep-title { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: #2a2118; }
+  .ep-tag { font-size: 10px; padding: 3px 8px; background: #fdf6e8; color: #a07830; border: 1px solid #e8d4a0; border-radius: 10px; font-family: system-ui, sans-serif; }
+  .ep-desc { font-size: 14px; color: #6a5e50; line-height: 1.6; font-family: system-ui, sans-serif; max-width: 560px; }
+  .ep-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .ep-dur { font-size: 12px; color: #a09080; font-family: system-ui, sans-serif; }
+  .play-btn { width: 36px; height: 36px; border-radius: 50%; background: #2a2118; display: flex; align-items: center; justify-content: center; color: #faf8f4; border: none; font-size: 12px; transition: background 0.2s; }
+  .play-btn:hover { background: #a07830; }
+  .platform-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .platform-links a { font-size: 13px; padding: 9px 20px; border: 1px solid #d8d0c0; border-radius: 7px; color: #7a6e60; font-family: system-ui, sans-serif; transition: all 0.2s; background: #faf8f4; }
+  .platform-links a:hover { color: #a07830; border-color: #a07830; }
+
+  /* BLOG */
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .blog-card { background: #faf8f4; border: 1px solid #e8e0d0; border-radius: 12px; padding: 24px; transition: all 0.2s; cursor: pointer; box-shadow: 0 1px 4px rgba(42,33,24,0.04); }
+  .blog-card:hover { border-color: #c8a860; box-shadow: 0 4px 16px rgba(42,33,24,0.08); }
+  .blog-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .blog-tag { font-size: 10px; padding: 3px 9px; background: #fdf6e8; color: #a07830; border: 1px solid #e8d4a0; border-radius: 10px; font-family: system-ui, sans-serif; }
+  .blog-date { font-size: 11px; color: #a09080; font-family: system-ui, sans-serif; }
+  .blog-title { font-family: Georgia, serif; font-size: 17px; font-weight: 700; color: #2a2118; margin-bottom: 10px; line-height: 1.35; }
+  .blog-excerpt { font-size: 13px; color: #6a5e50; line-height: 1.65; margin-bottom: 18px; font-family: system-ui, sans-serif; }
+  .read-more { font-size: 12px; color: #a07830; font-family: system-ui, sans-serif; }
+
+  /* MUSIC */
+  .music-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px; align-items: center; }
+  .music-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+  .music-tag { font-size: 12px; padding: 5px 12px; border: 1px solid #d8c8a8; border-radius: 20px; color: #7a6e60; font-family: system-ui, sans-serif; background: #faf8f4; }
+  .music-embed { background: #f3ede3; border: 1px solid #e8e0d0; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(42,33,24,0.06); }
+  .music-embed iframe { display: block; width: 100%; height: 280px; border: none; }
+
+  /* CHURCH */
+  .church-center { max-width: 640px; margin: 0 auto; text-align: center; }
+  .church-title { font-family: Georgia, serif; font-size: 36px; font-weight: 700; color: #2a2118; margin-bottom: 16px; line-height: 1.2; }
+  .church-desc { font-size: 16px; color: #6a5e50; line-height: 1.8; font-family: system-ui, sans-serif; margin-bottom: 12px; }
+  .launch-badge { display: inline-flex; align-items: center; gap: 8px; background: #fdf6e8; border: 1px solid #e8d4a0; border-radius: 20px; padding: 7px 16px; margin-bottom: 36px; }
+  .launch-dot { width: 7px; height: 7px; border-radius: 50%; background: #a07830; }
+  .launch-text { font-size: 13px; color: #a07830; font-family: system-ui, sans-serif; }
+  .church-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .church-card { background: #faf8f4; border: 1px solid #e8e0d0; border-radius: 10px; padding: 16px 14px; }
+  .church-card-title { font-size: 13px; font-weight: 600; color: #2a2118; margin-bottom: 4px; font-family: system-ui, sans-serif; }
+  .church-card-sub { font-size: 12px; color: #a09080; font-family: system-ui, sans-serif; }
+  .email-form { display: flex; max-width: 420px; margin: 0 auto; }
+  .email-input { flex: 1; background: #faf8f4; border: 1px solid #d8c8a8; border-right: none; border-radius: 8px 0 0 8px; padding: 12px 16px; color: #2a2118; font-size: 14px; font-family: system-ui, sans-serif; outline: none; }
+  .email-input:focus { border-color: #a07830; }
+  .email-btn { padding: 12px 20px; background: #2a2118; color: #faf8f4; border: none; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .email-btn:hover { background: #a07830; }
+  .success-box { background: #f0faf0; border: 1px solid #90c890; border-radius: 10px; padding: 16px 20px; color: #2a6a2a; font-size: 14px; font-family: system-ui, sans-serif; }
+
+  /* EMAIL SECTION */
+  .email-banner { background: #2a2118; border-radius: 16px; padding: 52px 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 48px; align-items: center; }
+  .email-title { font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: #faf8f4; margin-bottom: 16px; line-height: 1.3; }
+  .email-desc { font-size: 15px; color: #a09080; line-height: 1.8; font-family: system-ui, sans-serif; }
+  .email-form2 { display: flex; flex-direction: column; gap: 10px; }
+  .email-input2 { background: #3d3025; border: 1px solid #5a4a38; border-radius: 8px; padding: 13px 16px; color: #faf8f4; font-size: 14px; font-family: system-ui, sans-serif; outline: none; }
+  .email-input2::placeholder { color: #7a6a58; }
+  .email-input2:focus { border-color: #a07830; }
+  .email-btn2 { padding: 13px; background: #a07830; color: #faf8f4; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .email-btn2:hover { background: #b88840; }
+
+  /* VOICES */
+  .voices { background: #f3ede3; border-top: 1px solid #e8e0d0; padding: 64px 0; }
+  .voices-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #a09080; font-family: system-ui, sans-serif; margin-bottom: 24px; }
+  .voices-list { display: flex; gap: 12px; flex-wrap: wrap; }
+  .voice-card { background: #faf8f4; border: 1px solid #e8e0d0; border-radius: 10px; padding: 14px 20px; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+  .voice-card:hover { border-color: #c8a860; }
+  .voice-avatar { width: 32px; height: 32px; border-radius: 50%; background: #fdf6e8; border: 1px solid #e8d4a0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #a07830; font-family: Georgia, serif; font-weight: 700; }
+  .voice-name { font-size: 14px; color: #2a2118; font-family: system-ui, sans-serif; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid #e8e0d0; padding: 40px 24px; background: #f3ede3; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; font-family: Georgia, serif; font-size: 15px; color: #6a5e50; }
+  .footer-text { font-size: 12px; color: #a09080; font-family: system-ui, sans-serif; }
+  .footer-text a { color: #7a6e60; }
+  .footer-text a:hover { color: #a07830; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="7.5" y="1" width="3" height="16" rx="1.5" fill="#a07830"/><rect x="1" y="5" width="16" height="3" rx="1.5" fill="#a07830"/></svg>
+      B&amp;B
+    </a>
+    <div class="nav-links">
+      <a href="#podcast">Podcast</a>
+      <a href="#blog">Blog</a>
+      <a href="432hz.html">432 Hz</a>
+      <a href="#church">Let's Church</a>
+      <a href="#flatearth">Flat Earth</a>
+      <a href="#meetup">Meet Up</a>
+      <a href="#shop">Shop</a>
+      <a href="#email" class="nav-cta">Subscribe</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="max-width:680px">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><rect x="7.5" y="1" width="3" height="16" rx="1.5" fill="#a07830"/><rect x="1" y="5" width="16" height="3" rx="1.5" fill="#a07830"/></svg>
+      Christian Media Platform
+    </div>
+    <h1>Boomerangs<br><span>&amp; Bombshells</span></h1>
+    <p class="hero-sub">Truth · Faith · Discernment</p>
+    <p class="hero-desc">A faith-centered media hub created by Billy Heinzman — where truth returns, discernment grows, and believers find community.</p>
+    <div class="hero-btns">
+      <a href="#podcast" class="btn-primary">&#9654; Listen Now</a>
+      <a href="#church" class="btn-secondary">&#10013; Join Let's Church</a>
+      <a href="#email" class="btn-ghost">Get Episodes by Email</a>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <div class="social-inner">
+    <span class="social-label">Find us on</span>
+    <div class="social-links">
+      <a href="https://youtube.com" target="_blank">YouTube</a>
+      <a href="https://rumble.com" target="_blank">Rumble</a>
+      <a href="https://patreon.com" target="_blank">Patreon</a>
+      <a href="https://substack.com" target="_blank">Substack</a>
+    </div>
+  </div>
+</div>
+
+<!-- PODCAST -->
+<section id="podcast" class="section">
+  <div class="container">
+    <p class="eyebrow">Latest Episodes</p>
+    <h2 class="section-title" style="margin-bottom:40px">The Podcast</h2>
+    <div class="episode">
+      <span class="ep-num">001</span>
+      <div class="ep-body">
+        <div class="ep-header"><span class="ep-title">Where Truth Returns</span><span class="ep-tag">Foundation</span></div>
+        <p class="ep-desc">The vision behind Boomerangs & Bombshells — why truth, faith, and discernment matter more than ever.</p>
+      </div>
+      <div class="ep-right"><span class="ep-dur">48 min</span><button class="play-btn">&#9654;</button></div>
+    </div>
+    <div class="episode">
+      <span class="ep-num">002</span>
+      <div class="ep-body">
+        <div class="ep-header"><span class="ep-title">The Art of Discernment</span><span class="ep-tag">Faith</span></div>
+        <p class="ep-desc">How to test what you hear, read, and watch against Scripture. A practical guide for the modern believer.</p>
+      </div>
+      <div class="ep-right"><span class="ep-dur">54 min</span><button class="play-btn">&#9654;</button></div>
+    </div>
+    <div class="episode">
+      <span class="ep-num">003</span>
+      <div class="ep-body">
+        <div class="ep-header"><span class="ep-title">Faith in the Noise</span><span class="ep-tag">Testimony</span></div>
+        <p class="ep-desc">Staying grounded when the world feels chaotic. Billy shares what has anchored him through the storm.</p>
+      </div>
+      <div class="ep-right"><span class="ep-dur">41 min</span><button class="play-btn">&#9654;</button></div>
+    </div>
+    <div class="platform-links">
+      <a href="https://youtube.com" target="_blank">Watch on YouTube</a>
+      <a href="https://rumble.com" target="_blank">Watch on Rumble</a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="section section-alt">
+  <div class="container">
+    <p class="eyebrow">Written Word</p>
+    <h2 class="section-title" style="margin-bottom:40px">From the Blog</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-meta"><span class="blog-tag">Scripture</span><span class="blog-date">Mar 2026</span></div>
+        <h3 class="blog-title">Why the King James Bible Still Stands</h3>
+        <p class="blog-excerpt">An honest look at why Billy chose the KJV for Let's Church — and what makes it different from modern translations.</p>
+        <span class="read-more">Read more ›</span>
+      </div>
+      <div class="blog-card">
+        <div class="blog-meta"><span class="blog-tag">Music</span><span class="blog-date">Feb 2026</span></div>
+        <h3 class="blog-title">432 Hz: Frequency, Faith & Worship</h3>
+        <p class="blog-excerpt">The science and spiritual dimension of tuning. What changes when music is rooted in natural harmony.</p>
+        <span class="read-more">Read more ›</span>
+      </div>
+      <div class="blog-card">
+        <div class="blog-meta"><span class="blog-tag">Community</span><span class="blog-date">Feb 2026</span></div>
+        <h3 class="blog-title">Recommended Voices: Who Billy Listens To</h3>
+        <p class="blog-excerpt">A spotlight on George Hobbs, JT Follows JC, and Crow777 — voices worth your time.</p>
+        <span class="read-more">Read more ›</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 432 HZ MUSIC -->
+<section id="music" class="section">
+  <div class="container">
+    <div class="music-grid">
+      <div>
+        <p class="eyebrow">Frequency & Worship</p>
+        <h2 class="section-title">432 Hz Music</h2>
+        <p style="font-size:15px;color:#6a5e50;line-height:1.8;font-family:system-ui,sans-serif;margin-top:16px">Curated worship, ambient, and prayer music tuned to 432 Hz — a frequency rooted in the natural order of creation. Let it accompany your study, prayer, and rest.</p>
+        <div class="music-tags">
+          <span class="music-tag">Worship</span>
+          <span class="music-tag">Ambient</span>
+          <span class="music-tag">Prayer</span>
+          <span class="music-tag">Meditation</span>
+        </div>
+        <div style="margin-top:24px">
+          <a href="432hz.html" style="font-size:13px;color:#a07830;font-family:system-ui,sans-serif;border:1px solid #e8d4a0;background:#fdf6e8;padding:9px 18px;border-radius:6px;display:inline-block;transition:all 0.2s;">Explore the full 432 Hz page ›</a>
+        </div>
+      </div>
+      <div class="music-embed">
+        <iframe src="https://www.youtube.com/embed/yC4PbMWZmrM" title="432 Hz Worship Music" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LET'S CHURCH -->
+<section id="church" class="section section-alt">
+  <div class="container">
+    <div class="church-center">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;background:#fdf6e8;border:1px solid #e8d4a0;border-radius:50%;color:#a07830;margin-bottom:24px;font-size:22px;">✝</div>
+      <p class="eyebrow">Community Bible Study</p>
+      <h2 class="church-title">Let's Church</h2>
+      <p class="church-desc">A bi-weekly Bible study walking through the King James Bible — chapter by chapter, with open discussion. Welcoming, growth-focused, community-driven.</p>
+      <div class="launch-badge"><span class="launch-dot"></span><span class="launch-text">Launching May 1, 2026</span></div>
+      <div class="church-cards">
+        <div class="church-card"><p class="church-card-title">King James Bible</p><p class="church-card-sub">Chapter by chapter</p></div>
+        <div class="church-card"><p class="church-card-title">Open Discussion</p><p class="church-card-sub">Everyone welcome</p></div>
+        <div class="church-card"><p class="church-card-title">Bi-Weekly</p><p class="church-card-sub">Starting May 1</p></div>
+      </div>
+      <div class="email-form" id="church-form">
+        <input class="email-input" type="email" placeholder="Your email address" id="church-email" />
+        <button class="email-btn" onclick="joinChurch()">Join</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL LIST -->
+<section id="email" class="section">
+  <div class="container">
+    <div class="email-banner">
+      <div>
+        <p style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c8a870;font-family:system-ui,sans-serif;margin-bottom:12px;">Stay Connected</p>
+        <h2 class="email-title">Join the Email List</h2>
+        <p class="email-desc">New episode alerts, fresh blog posts, music additions, and updates from Billy — straight to your inbox. No spam. Faith only.</p>
+      </div>
+      <div class="email-form2" id="main-form">
+        <input class="email-input2" type="email" placeholder="Your email address" id="main-email" />
+        <button class="email-btn2" onclick="subscribe()">Subscribe — It's Free</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="section">
+  <div class="container">
+    <p class="eyebrow">The Shop</p>
+    <h2 class="section-title" style="margin-bottom:8px">Faith & Truth Apparel</h2>
+    <p style="font-size:14px;color:#6a5e50;font-family:system-ui,sans-serif;margin-bottom:40px;">Wear the word. Carry the truth.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:start;">
+
+      <!-- PRODUCT IMAGE + SVG -->
+      <div>
+        <div style="background:#f3ede3;border:1px solid #e8e0d0;border-radius:16px;padding:40px 32px;text-align:center;">
+
+          <!-- T-SHIRT SVG -->
+          <svg viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;margin:0 auto;display:block;">
+            <!-- Shirt body -->
+            <path d="M60 60 L20 90 L45 110 L45 230 L235 230 L235 110 L260 90 L220 60 L185 80 C185 80 170 95 140 95 C110 95 95 80 95 80 Z" fill="#2a2118" stroke="#3d3025" stroke-width="1.5"/>
+            <!-- Left sleeve -->
+            <path d="M60 60 L20 90 L45 110 L75 90 L95 80 Z" fill="#241c14" stroke="#3d3025" stroke-width="1.5"/>
+            <!-- Right sleeve -->
+            <path d="M220 60 L260 90 L235 110 L205 90 L185 80 Z" fill="#241c14" stroke="#3d3025" stroke-width="1.5"/>
+            <!-- Collar -->
+            <path d="M95 80 C95 80 110 95 140 95 C170 95 185 80 185 80" fill="none" stroke="#3d3025" stroke-width="2"/>
+
+            <!-- TOMBSTONE on shirt -->
+            <g transform="translate(85, 105)">
+              <!-- Stone base -->
+              <rect x="18" y="85" width="74" height="14" rx="2" fill="#c9a84c" opacity="0.9"/>
+              <!-- Stone body -->
+              <rect x="22" y="30" width="66" height="58" rx="2" fill="#c9a84c" opacity="0.9"/>
+              <!-- Arched top -->
+              <path d="M22 30 Q55 0 88 30" fill="#c9a84c" opacity="0.9"/>
+              <!-- Cross on stone -->
+              <rect x="51" y="10" width="8" height="26" rx="2" fill="#2a2118" opacity="0.85"/>
+              <rect x="43" y="18" width="24" height="8" rx="2" fill="#2a2118" opacity="0.85"/>
+              <!-- Scripture text on stone -->
+              <text x="55" y="52" text-anchor="middle" font-family="Georgia, serif" font-size="5.5" fill="#2a2118" font-weight="700">PSALMS</text>
+              <text x="55" y="61" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#2a2118" font-weight="700">19:1</text>
+              <!-- Divider line -->
+              <line x1="30" y1="66" x2="80" y2="66" stroke="#2a2118" stroke-width="0.8" opacity="0.6"/>
+              <!-- Scripture quote - line 1 -->
+              <text x="55" y="74" text-anchor="middle" font-family="Georgia, serif" font-size="4.2" fill="#2a2118" font-style="italic">"The heavens declare</text>
+              <text x="55" y="80" text-anchor="middle" font-family="Georgia, serif" font-size="4.2" fill="#2a2118" font-style="italic">the glory of God"</text>
+              <!-- Grass blades -->
+              <line x1="10" y1="99" x2="14" y2="88" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="16" y1="99" x2="18" y2="87" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="90" y1="99" x2="88" y2="88" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="96" y1="99" x2="92" y2="87" stroke="#5a7a3a" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="4" y1="99" x2="7" y2="90" stroke="#4a6a30" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
+
+            <!-- B&B text below tombstone -->
+            <text x="140" y="222" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#c9a84c" letter-spacing="2">B &amp; B</text>
+          </svg>
+
+          <!-- COLOR PREVIEW DOTS -->
+          <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap;" id="color-swatches">
+            <div onclick="selectColor(this,'#2a2118','Dark Brown')" style="width:28px;height:28px;border-radius:50%;background:#2a2118;cursor:pointer;border:2px solid #a07830;title='Dark Brown'" title="Dark Brown"></div>
+            <div onclick="selectColor(this,'#1a1a1a','Black')" style="width:28px;height:28px;border-radius:50%;background:#1a1a1a;cursor:pointer;border:2px solid transparent;" title="Black"></div>
+            <div onclick="selectColor(this,'#f0ece4','Cream')" style="width:28px;height:28px;border-radius:50%;background:#f0ece4;cursor:pointer;border:2px solid transparent;box-shadow:inset 0 0 0 1px #d8d0c0;" title="Cream"></div>
+            <div onclick="selectColor(this,'#8B7355','Tan')" style="width:28px;height:28px;border-radius:50%;background:#8B7355;cursor:pointer;border:2px solid transparent;" title="Tan"></div>
+            <div onclick="selectColor(this,'#2c4a2c','Forest Green')" style="width:28px;height:28px;border-radius:50%;background:#2c4a2c;cursor:pointer;border:2px solid transparent;" title="Forest Green"></div>
+            <div onclick="selectColor(this,'#1e2d4a','Navy')" style="width:28px;height:28px;border-radius:50%;background:#1e2d4a;cursor:pointer;border:2px solid transparent;" title="Navy"></div>
+            <div onclick="selectColor(this,'#7a1a1a','Burgundy')" style="width:28px;height:28px;border-radius:50%;background:#7a1a1a;cursor:pointer;border:2px solid transparent;" title="Burgundy"></div>
+            <div onclick="selectColor(this,'#6a6a6a','Charcoal')" style="width:28px;height:28px;border-radius:50%;background:#6a6a6a;cursor:pointer;border:2px solid transparent;" title="Charcoal"></div>
+          </div>
+          <p style="font-size:11px;color:#a09080;font-family:system-ui,sans-serif;margin-top:8px;" id="color-label">Color: Dark Brown</p>
+        </div>
+      </div>
+
+      <!-- PRODUCT DETAILS -->
+      <div>
+        <div style="display:inline-block;font-size:10px;padding:3px 10px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;margin-bottom:14px;">New · Limited Release</div>
+
+        <h3 style="font-family:Georgia,serif;font-size:26px;font-weight:700;color:#2a2118;line-height:1.2;margin-bottom:8px;">Psalms 19:1 Tombstone Tee</h3>
+
+        <p style="font-size:13px;color:#7a6e60;font-family:system-ui,sans-serif;font-style:italic;line-height:1.6;margin-bottom:16px;padding:12px 16px;background:#fdf6e8;border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;">"The heavens declare the glory of God; and the firmament sheweth his handywork." — Psalms 19:1 (KJV)</p>
+
+        <div style="font-size:28px;font-family:Georgia,serif;font-weight:700;color:#2a2118;margin-bottom:20px;">$20.00</div>
+
+        <!-- SIZE SELECTOR -->
+        <div style="margin-bottom:20px;">
+          <p style="font-size:12px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;">Size</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="size-buttons">
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">XS</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">S</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #a07830;border-radius:6px;background:#fdf6e8;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;font-weight:600;">M</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">L</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">XL</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">2XL</button>
+            <button onclick="selectSize(this)" style="padding:8px 14px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:13px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">3XL</button>
+          </div>
+        </div>
+
+        <!-- COLOR SELECTOR -->
+        <div style="margin-bottom:24px;">
+          <p style="font-size:12px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;">Color — <span id="color-label-2" style="font-weight:400;text-transform:none;color:#7a6e60;">Dark Brown</span></p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button onclick="selectColor2(this,'Dark Brown')" style="padding:6px 12px;border:1px solid #a07830;border-radius:6px;background:#fdf6e8;font-size:12px;font-family:system-ui,sans-serif;color:#a07830;cursor:pointer;font-weight:600;">Dark Brown</button>
+            <button onclick="selectColor2(this,'Black')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Black</button>
+            <button onclick="selectColor2(this,'Cream')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Cream</button>
+            <button onclick="selectColor2(this,'Tan')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Tan</button>
+            <button onclick="selectColor2(this,'Forest Green')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Forest Green</button>
+            <button onclick="selectColor2(this,'Navy')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Navy</button>
+            <button onclick="selectColor2(this,'Burgundy')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Burgundy</button>
+            <button onclick="selectColor2(this,'Charcoal')" style="padding:6px 12px;border:1px solid #d8d0c0;border-radius:6px;background:#faf8f4;font-size:12px;font-family:system-ui,sans-serif;color:#2a2118;cursor:pointer;">Charcoal</button>
+          </div>
+        </div>
+
+        <!-- ADD TO CART -->
+        <button onclick="addToCart()" style="width:100%;padding:14px;background:#2a2118;color:#faf8f4;border:none;border-radius:8px;font-size:15px;font-family:system-ui,sans-serif;font-weight:600;cursor:pointer;margin-bottom:10px;transition:background 0.2s;" onmouseover="this.style.background='#a07830'" onmouseout="this.style.background='#2a2118'">Add to Cart — $20.00</button>
+        <p style="font-size:11px;color:#a09080;font-family:system-ui,sans-serif;text-align:center;" id="cart-msg"></p>
+
+        <!-- PRODUCT DETAILS -->
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid #e8e0d0;">
+          <p style="font-size:12px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:10px;letter-spacing:0.06em;text-transform:uppercase;">Details</p>
+          <ul style="list-style:none;font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:2;">
+            <li>✓ &nbsp;100% heavyweight cotton — built to last</li>
+            <li>✓ &nbsp;Unisex fit · XS through 3XL</li>
+            <li>✓ &nbsp;Gold tombstone graphic · KJV Scripture</li>
+            <li>✓ &nbsp;Printed in the USA</li>
+            <li>✓ &nbsp;Ships within 5–7 business days</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px;padding:12px 16px;background:#fdf6e8;border-radius:8px;border:1px solid #e8d4a0;">
+          <p style="font-size:12px;color:#7a6e60;font-family:system-ui,sans-serif;line-height:1.6;"><strong style="color:#a07830;">Note:</strong> Shop is currently being set up. To order, email <a href="mailto:boomerangandbombshells@gmail.com" style="color:#a07830;">boomerangandbombshells@gmail.com</a> with your size, color, and shipping address. We'll invoice you directly.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="section">
+  <div class="container">
+    <p class="eyebrow">The Shop</p>
+    <h2 class="section-title" style="margin-bottom:8px">Wear the Truth</h2>
+    <p style="font-size:15px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:40px;max-width:560px">Official Boomerangs & Bombshells gear. Every purchase supports the platform and the mission.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+
+      <!-- Hat -->
+      <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(42,33,24,0.05);">
+        <div style="background:#f3ede3;height:200px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e0d0;">
+          <div style="text-align:center;">
+            <div style="font-size:72px;line-height:1;">🧢</div>
+            <div style="margin-top:10px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a09080;font-family:system-ui,sans-serif;">B&amp;B Classic Hat</div>
+          </div>
+        </div>
+        <div style="padding:20px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <h3 style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;line-height:1.3;">Boomerangs & Bombshells Hat</h3>
+            <span style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#a07830;margin-left:12px;white-space:nowrap;">$20</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.6;margin-bottom:16px;">Classic structured hat embroidered with the B&B logo. Truth. Faith. Discernment. — on your head every day.</p>
+          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Embroidered Logo</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Adjustable Fit</span>
+          </div>
+          <button onclick="addToCart('B&amp;B Hat', 20)" style="width:100%;padding:11px;background:#2a2118;color:#faf8f4;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:system-ui,sans-serif;cursor:pointer;">Add to Cart — $20</button>
+        </div>
+      </div>
+
+      <!-- Mug -->
+      <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(42,33,24,0.05);">
+        <div style="background:#f3ede3;height:200px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e0d0;">
+          <div style="text-align:center;">
+            <div style="font-size:72px;line-height:1;">☕</div>
+            <div style="margin-top:10px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a09080;font-family:system-ui,sans-serif;">B&amp;B Coffee Mug</div>
+          </div>
+        </div>
+        <div style="padding:20px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <h3 style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;line-height:1.3;">Boomerangs & Bombshells Mug</h3>
+            <span style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#a07830;margin-left:12px;white-space:nowrap;">$20</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.6;margin-bottom:16px;">Start every morning grounded in truth. 11oz ceramic mug printed with the B&B logo and tagline. Dishwasher safe.</p>
+          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">11oz Ceramic</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Dishwasher Safe</span>
+          </div>
+          <button onclick="addToCart('B&amp;B Mug', 20)" style="width:100%;padding:11px;background:#2a2118;color:#faf8f4;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:system-ui,sans-serif;cursor:pointer;">Add to Cart — $20</button>
+        </div>
+      </div>
+
+      <!-- Tumbler -->
+      <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(42,33,24,0.05);position:relative;">
+        <div style="position:absolute;top:14px;right:14px;background:#a07830;color:#faf8f4;font-size:10px;font-weight:600;font-family:system-ui,sans-serif;padding:3px 10px;border-radius:10px;z-index:1;">BEST SELLER</div>
+        <div style="background:#f3ede3;height:200px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #e8e0d0;">
+          <div style="text-align:center;">
+            <div style="font-size:72px;line-height:1;">🥤</div>
+            <div style="margin-top:10px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a09080;font-family:system-ui,sans-serif;">B&amp;B Tumbler</div>
+          </div>
+        </div>
+        <div style="padding:20px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <h3 style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;line-height:1.3;">B&B Insulated Tumbler</h3>
+            <span style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#a07830;margin-left:12px;white-space:nowrap;">$75</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.6;margin-bottom:16px;">40oz double-wall insulated tumbler. Keeps drinks cold 48 hrs, hot 12 hrs. Laser-engraved B&B logo — built to last as long as your faith.</p>
+          <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">40oz</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Double-Wall Insulated</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Laser Engraved</span>
+          </div>
+          <button onclick="addToCart('B&amp;B Tumbler', 75)" style="width:100%;padding:11px;background:#a07830;color:#faf8f4;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:system-ui,sans-serif;cursor:pointer;">Add to Cart — $75</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Cart bar -->
+    <div id="cart-bar" style="display:none;margin-top:28px;background:#2a2118;border-radius:12px;padding:18px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <span style="font-size:11px;color:#c8a870;font-family:system-ui,sans-serif;letter-spacing:0.08em;text-transform:uppercase;">Your Cart</span>
+        <div id="cart-items" style="font-size:14px;color:#faf8f4;font-family:system-ui,sans-serif;margin-top:4px;"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div>
+          <span style="font-size:12px;color:#a09080;font-family:system-ui,sans-serif;">Total</span>
+          <div id="cart-total" style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#c9a84c;"></div>
+        </div>
+        <button onclick="checkout()" style="padding:10px 22px;background:#a07830;color:#faf8f4;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:system-ui,sans-serif;cursor:pointer;">Checkout ›</button>
+        <button onclick="clearCart()" style="padding:10px 16px;background:transparent;color:#7a6a58;border:1px solid #3d3025;border-radius:8px;font-size:12px;font-family:system-ui,sans-serif;cursor:pointer;">Clear</button>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:#b8a890;font-family:system-ui,sans-serif;margin-top:20px;line-height:1.7;">✝ All purchases support the B&B platform and ministry. Shipping calculated at checkout. Questions? <a href="mailto:boomerangandbombshells@gmail.com" style="color:#a07830;">boomerangandbombshells@gmail.com</a></p>
+
+    <!-- PROUDLY SUPPORTED -->
+    <div style="margin-top:60px;padding-top:48px;border-top:1px solid #e8e0d0;">
+      <div style="margin-bottom:28px;">
+        <p style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a07830;font-family:system-ui,sans-serif;margin-bottom:8px;">Products We Believe In</p>
+        <h3 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#2a2118;margin-bottom:10px;">Companies We Proudly Support</h3>
+        <p style="font-size:14px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;max-width:580px;">These are brands Billy personally uses and trusts. Clean, natural, truth-seeking — aligned with the same values we stand for here at Boomerangs & Bombshells.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+
+        <!-- Modern Roots Life -->
+        <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;padding:28px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c8a860'" onmouseout="this.style.borderColor='#e8e0d0'">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+            <div style="width:48px;height:48px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌿</div>
+            <div>
+              <div style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;">Modern Roots Life</div>
+              <div style="font-size:12px;color:#a07830;font-family:system-ui,sans-serif;">Health supplements · Josh Truex</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Lab Tested</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Glyphosate Free</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Zero Fillers</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Made Fresh to Order</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:18px;">Led by Josh Truex — a former top corporate trainer who spent 20 years watching the supplement industry lie. Modern Roots Life was built to bring health back to how God created it. Products are lab-tested, glyphosate-free, zero fillers, zero synthetics, made fresh in small batches. No Amazon, no Walmart — direct only, so quality is never compromised. Known for their Grass-Fed Beef Liver capsules, Salt of Life, detox supplements, and whole-food cellular health protocols.</p>
+          <a href="https://modernrootslife.com" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:9px 18px;background:#2a2118;color:#faf8f4;border-radius:7px;font-family:system-ui,sans-serif;font-weight:600;transition:background 0.2s;" onmouseover="this.style.background='#a07830'" onmouseout="this.style.background='#2a2118'">
+            Visit modernrootslife.com ›
+          </a>
+        </div>
+
+        <!-- Cultivate Elevate -->
+        <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;padding:28px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c8a860'" onmouseout="this.style.borderColor='#e8e0d0'">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+            <div style="width:48px;height:48px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🍄</div>
+            <div>
+              <div style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;">Cultivate Elevate</div>
+              <div style="font-size:12px;color:#a07830;font-family:system-ui,sans-serif;">Superfoods · Mushrooms · Minerals</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">USDA Organic</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Lab Tested</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">No Fillers</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Small Batch</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:18px;">Cultivate Elevate is on a mission to be your own healer through superfoods and minerals. USDA organic, lab-tested, small batch — no fillers, no preservatives, no pesticides. Just pure superfoods sourced from small organic farms around the world. Known for their organic mushroom powders, Shilajit tablets, Lion's Mane, Pearl Powder, and Dragon's Blood capsules. 437k followers on Instagram. Holistic health made real and accessible.</p>
+          <a href="https://cultivateelevate.com" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:9px 18px;background:#2a2118;color:#faf8f4;border-radius:7px;font-family:system-ui,sans-serif;font-weight:600;transition:background 0.2s;" onmouseover="this.style.background='#a07830'" onmouseout="this.style.background='#2a2118'">
+            Visit cultivateelevate.com ›
+          </a>
+        </div>
+
+      </div>
+
+      <p style="font-size:12px;color:#b8a890;font-family:system-ui,sans-serif;margin-top:20px;line-height:1.7;">These are personal recommendations from Billy — brands he trusts and uses. Boomerangs & Bombshells is not paid to feature these companies. We support them because they're the real deal.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLAT EARTH -->
+<section id="flatearth" class="section section-alt">
+  <div class="container">
+    <p class="eyebrow">Biblical Cosmology · Truth Seeking</p>
+    <h2 class="section-title" style="margin-bottom:8px">Flat Earth</h2>
+    <p style="font-size:15px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.8;margin-bottom:40px;max-width:640px">One of the most suppressed topics of our time — and one of the most Biblical. We don't ask you to believe it. We ask you to research it. The firmament is in Scripture. The fixed Earth is in Scripture. Start here.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:40px;">
+
+      <!-- Eric Dubay card -->
+      <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;overflow:hidden;">
+        <div style="background:#f3ede3;border:1px solid #e8e0d0;border-radius:10px;overflow:hidden;margin:16px 16px 0;">
+          <iframe width="100%" height="200" src="https://www.youtube.com/embed/-Ax_YpQsy88" title="Eric Dubay — 200 Proofs Earth is Not a Spinning Ball" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;border:none;"></iframe>
+        </div>
+        <div style="padding:20px 22px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+            <div style="width:38px;height:38px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🌐</div>
+            <div>
+              <div style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#2a2118;">Eric Dubay</div>
+              <div style="font-size:11px;color:#a07830;font-family:system-ui,sans-serif;">Author · International Flat Earth Research Society</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">200 Proofs</span>
+            <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Biblical Cosmology</span>
+          </div>
+          <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:16px;">Eric Dubay is an American author of seven books, former University professor, and head of the International Flat Earth Research Society. His documentary <em>200 Proofs Earth is Not a Spinning Ball</em> is the most comprehensive case ever assembled. Watch it with an open Bible beside you.</p>
+          <a href="https://www.youtube.com/watch?v=-Ax_YpQsy88" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:8px 16px;background:#2a2118;color:#faf8f4;border-radius:7px;font-family:system-ui,sans-serif;font-weight:600;">&#9654; Watch 200 Proofs</a>
+        </div>
+      </div>
+
+      <!-- Flat Earth Files podcast -->
+      <div style="background:#faf8f4;border:1px solid #e8e0d0;border-radius:14px;padding:24px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:48px;height:48px;border-radius:10px;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🎙</div>
+          <div>
+            <div style="font-family:Georgia,serif;font-size:16px;font-weight:700;color:#2a2118;">Flat Earth Files</div>
+            <div style="font-size:11px;color:#a07830;font-family:system-ui,sans-serif;">Podcast · Available on Spotify</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+          <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Deep Research</span>
+          <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Podcast</span>
+          <span style="font-size:10px;padding:3px 9px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:10px;font-family:system-ui,sans-serif;">Spotify</span>
+        </div>
+        <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:20px;">The Flat Earth Files podcast goes deep into the research — cosmology, Scripture, the firmament, NASA deception, and what the ancients actually knew. A great companion to your study. Start with the episode Billy recommends below.</p>
+        <div style="background:#f3ede3;border:1px solid #e8e0d0;border-radius:10px;overflow:hidden;margin-bottom:16px;">
+          <iframe style="border-radius:10px;display:block;" src="https://open.spotify.com/embed/episode/3Uzc1XG8XaSXVFeDLOGNdS?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <a href="https://open.spotify.com/episode/3Uzc1XG8XaSXVFeDLOGNdS" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:8px 16px;background:#1DB954;color:#fff;border-radius:7px;font-family:system-ui,sans-serif;font-weight:600;">&#9654; Listen on Spotify</a>
+      </div>
+
+      <!-- Bible & Flat Earth context -->
+      <div style="background:#fdf6e8;border:1px solid #e8d4a0;border-radius:14px;padding:24px;">
+        <div style="font-size:28px;margin-bottom:14px;">✝</div>
+        <h3 style="font-family:Georgia,serif;font-size:17px;font-weight:700;color:#2a2118;margin-bottom:12px;">What Does Scripture Say?</h3>
+        <p style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.8;margin-bottom:14px;">The Bible describes a fixed Earth, a firmament dome, waters above and below, and the sun and moon as lights in the sky — not stars millions of miles away. These aren't metaphors. They're cosmological descriptions written by men who were told the truth.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:#faf8f4;border:1px solid #e8d4a0;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:11px;color:#a07830;font-family:system-ui,sans-serif;margin-bottom:3px;">Genesis 1:6-8</div>
+            <div style="font-size:13px;color:#2a2118;font-family:Georgia,serif;font-style:italic;">"And God made the firmament, and divided the waters..."</div>
+          </div>
+          <div style="background:#faf8f4;border:1px solid #e8d4a0;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:11px;color:#a07830;font-family:system-ui,sans-serif;margin-bottom:3px;">Job 38:4</div>
+            <div style="font-size:13px;color:#2a2118;font-family:Georgia,serif;font-style:italic;">"Where wast thou when I laid the foundations of the earth?"</div>
+          </div>
+          <div style="background:#faf8f4;border:1px solid #e8d4a0;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:11px;color:#a07830;font-family:system-ui,sans-serif;margin-bottom:3px;">Psalm 93:1</div>
+            <div style="font-size:13px;color:#2a2118;font-family:Georgia,serif;font-style:italic;">"The world also is stablished, that it cannot be moved."</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#a09080;font-family:system-ui,sans-serif;margin-top:14px;line-height:1.7;">This section is for discernment and research. We trust the Word over institutions. You decide.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LET'S MEET UP -->
+<section id="meetup" class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center;">
+      <div>
+        <p class="eyebrow">Phoenix, Arizona</p>
+        <h2 class="section-title" style="margin-bottom:16px">Let's Meet Up</h2>
+        <p style="font-size:16px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.8;margin-bottom:16px;">If you're in the Phoenix area and believe what we believe — truth over comfort, faith over fear, discernment over deception — Billy wants to connect with you in person.</p>
+        <p style="font-size:15px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.8;margin-bottom:28px;">Whether it's flat earth, 432 Hz, health sovereignty, Biblical cosmology, or just getting around a table with like-minded believers — there's something powerful about real community. Iron sharpens iron.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;">📍</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:2px;">Phoenix Metro Area</div>
+              <div style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;">Open to Scottsdale, Mesa, Chandler, Gilbert, Tempe, Peoria — wherever makes sense for the group</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;">✝</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:2px;">Faith-Based · Truth-Seeking</div>
+              <div style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;">Like-minded believers interested in Biblical truth, alternative research, natural health, and real community</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#fdf6e8;border:1px solid #e8d4a0;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;">🤝</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#2a2118;font-family:system-ui,sans-serif;margin-bottom:2px;">Informal & Welcoming</div>
+              <div style="font-size:13px;color:#6a5e50;font-family:system-ui,sans-serif;">No gatekeeping. You don't have to have it all figured out. Just bring your curiosity and your King James.</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="mailto:boomerangandbombshells@gmail.com?subject=Let's Meet Up — Phoenix" style="display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:#2a2118;color:#faf8f4;border-radius:8px;font-size:14px;font-family:system-ui,sans-serif;font-weight:600;">✉ Reach Out to Billy</a>
+          <a href="#email" style="display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:#fdf6e8;color:#a07830;border:1px solid #e8d4a0;border-radius:8px;font-size:14px;font-family:system-ui,sans-serif;font-weight:500;">Join the Email List</a>
+        </div>
+      </div>
+
+      <!-- Sign up card -->
+      <div style="background:#f3ede3;border:1px solid #e8e0d0;border-radius:16px;padding:36px;">
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#a07830;font-family:system-ui,sans-serif;margin-bottom:12px;">Express Interest</div>
+        <h3 style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#2a2118;margin-bottom:12px;">I'm in the Phoenix Area</h3>
+        <p style="font-size:14px;color:#6a5e50;font-family:system-ui,sans-serif;line-height:1.7;margin-bottom:24px;">Drop your email and Billy will reach out when a meetup is being organized. No commitment — just connection.</p>
+        <div id="meetup-form">
+          <input type="text" placeholder="Your name" id="meetup-name" style="width:100%;background:#faf8f4;border:1px solid #d8c8a8;border-radius:8px;padding:12px 16px;color:#2a2118;font-size:14px;font-family:system-ui,sans-serif;outline:none;margin-bottom:10px;" /><br>
+          <input type="email" placeholder="Your email address" id="meetup-email" style="width:100%;background:#faf8f4;border:1px solid #d8c8a8;border-radius:8px;padding:12px 16px;color:#2a2118;font-size:14px;font-family:system-ui,sans-serif;outline:none;margin-bottom:10px;" /><br>
+          <select id="meetup-area" style="width:100%;background:#faf8f4;border:1px solid #d8c8a8;border-radius:8px;padding:12px 16px;color:#2a2118;font-size:14px;font-family:system-ui,sans-serif;outline:none;margin-bottom:16px;">
+            <option value="">Which area of Phoenix?</option>
+            <option>Phoenix</option>
+            <option>Scottsdale</option>
+            <option>Mesa</option>
+            <option>Chandler</option>
+            <option>Gilbert</option>
+            <option>Tempe</option>
+            <option>Peoria</option>
+            <option>Surprise / Sun City West</option>
+            <option>Other (I'll say in the email)</option>
+          </select><br>
+          <button onclick="joinMeetup()" style="width:100%;padding:13px;background:#a07830;color:#faf8f4;border:none;border-radius:8px;font-size:14px;font-weight:600;font-family:system-ui,sans-serif;cursor:pointer;">Count Me In ›</button>
+        </div>
+        <p style="font-size:11px;color:#a09080;font-family:system-ui,sans-serif;margin-top:14px;line-height:1.6;">Your info stays with Billy. No lists, no spam — just a real person reaching out when something is planned.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDED VOICES -->
+<div class="voices">
+  <div class="container">
+    <p class="voices-label">Voices Worth Your Time</p>
+    <div class="voices-list">
+      <div class="voice-card"><div class="voice-avatar">G</div><span class="voice-name">George Hobbs</span></div>
+      <div class="voice-card"><div class="voice-avatar">J</div><span class="voice-name">JT Follows JC</span></div>
+      <div class="voice-card"><div class="voice-avatar">C</div><span class="voice-name">Crow777</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="7.5" y="1" width="3" height="16" rx="1.5" fill="#a07830"/><rect x="1" y="5" width="16" height="3" rx="1.5" fill="#a07830"/></svg>
+      Boomerangs &amp; Bombshells
+    </div>
+    <p class="footer-text">
+      <a href="mailto:boomerangandbombshells@gmail.com">boomerangandbombshells@gmail.com</a>
+      &nbsp;·&nbsp; Truth. Faith. Discernment.
+    </p>
+  </div>
+</footer>
+
+<script>
+function joinChurch() {
+  const email = document.getElementById('church-email').value;
+  if (email) { document.getElementById('church-form').outerHTML = '<div class="success-box">You\'re on the list. See you May 1st. ✝</div>'; }
+}
+function subscribe() {
+  const email = document.getElementById('main-email').value;
+  if (email) { document.getElementById('main-form').outerHTML = '<div class="success-box" style="padding:20px 24px;font-size:15px;text-align:center;max-width:420px;margin:0 auto;">Welcome to the community. ✝️</div>'; }
+}
+function selectSize(el) {
+  document.querySelectorAll('#size-buttons button').forEach(b => {
+    b.style.borderColor = '#d8d0c0';
+    b.style.background = '#faf8f4';
+    b.style.fontWeight = '400';
+    b.style.color = '#2a2118';
+  });
+  el.style.borderColor = '#a07830';
+  el.style.background = '#fdf6e8';
+  el.style.fontWeight = '600';
+}
+function selectColor(el, hex, name) {
+  document.querySelectorAll('#color-swatches div').forEach(d => d.style.borderColor = 'transparent');
+  el.style.borderColor = '#a07830';
+  document.getElementById('color-label').textContent = 'Color: ' + name;
+}
+function selectColor2(el, name) {
+  document.querySelectorAll('#color-label-2').forEach(s => {});
+  const allBtns = el.parentElement.querySelectorAll('button');
+  allBtns.forEach(b => { b.style.borderColor = '#d8d0c0'; b.style.background = '#faf8f4'; b.style.color = '#2a2118'; b.style.fontWeight = '400'; });
+  el.style.borderColor = '#a07830';
+  el.style.background = '#fdf6e8';
+  el.style.color = '#a07830';
+  el.style.fontWeight = '600';
+  document.getElementById('color-label-2').textContent = name;
+  document.getElementById('color-label').textContent = 'Color: ' + name;
+}
+function joinMeetup() {
+  const name = document.getElementById('meetup-name').value;
+  const email = document.getElementById('meetup-email').value;
+  if (name && email) {
+    document.getElementById('meetup-form').outerHTML = '<div class="success-box" style="padding:20px;font-size:14px;line-height:1.7;">Thanks ' + name + '! Billy will be in touch when a Phoenix meetup is being planned. ✝</div>';
+  }
+}
+var cart = [];
+function addToCart(name, price) {
+  var existing = cart.find(function(i){ return i.name === name; });
+  if (existing) { existing.qty++; } else { cart.push({name: name, price: price, qty: 1}); }
+  var bar = document.getElementById('cart-bar');
+  var itemsEl = document.getElementById('cart-items');
+  var totalEl = document.getElementById('cart-total');
+  bar.style.display = 'flex';
+  itemsEl.textContent = cart.map(function(i){ return i.qty + 'x ' + i.name; }).join(' · ');
+  var total = cart.reduce(function(s,i){ return s + i.price * i.qty; }, 0);
+  totalEl.textContent = '$' + total;
+}
+function clearCart() {
+  cart = [];
+  document.getElementById('cart-bar').style.display = 'none';
+}
+function checkout() {
+  alert('Checkout coming soon! Email boomerangandbombshells@gmail.com to place your order directly.');
+}
+</script>
+</body>
+</html>
